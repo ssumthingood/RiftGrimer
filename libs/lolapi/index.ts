@@ -9,4 +9,5 @@ const api = axios.create({
 
 export const LOLapi = {
     searchByName: () => api.get("summoner/v4/summoners/by-name/버튼을눌러지금딱"),
+    rotation: () => api.get("platform/v3/champion-rotations"),
 };
