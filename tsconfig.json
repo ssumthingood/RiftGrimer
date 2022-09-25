@@ -18,9 +18,10 @@
         "paths": {
             "@libs/*": ["libs/*"],
             "@components/*": ["components/*"],
-            "@store/*": ["store/*"]
+            "@store/*": ["store/*"],
+            "@pages/*": ["pages/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "***/**/*.tsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "***/**/*.ts", "**/*.tsx", "***/**/*.tsx"],
     "exclude": ["node_modules"]
 }

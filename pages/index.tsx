@@ -1,7 +1,6 @@
 import axios from "axios";
 import type { NextPage } from "next";
-import { userApi } from "./api";
-import photos from "./api/photos";
+import { LOLapi } from "@libs/lolapi";
 
 const Home: NextPage = () => {
     console.log(process.env.NEXT_PUBLIC_RIOT_KEY);
@@ -11,11 +10,13 @@ const Home: NextPage = () => {
         console.log(photos);
     };
 
-    const fetchPhotos2 = async () => {
+    const fetchPhotos2 = () => {
         axios.get("/api/photos").then((res) => {
             console.log(res.data.photos);
         });
     };
+
+    console.log(LOLapi.searchByName());
 
     fetchPhotos();
     fetchPhotos2();
