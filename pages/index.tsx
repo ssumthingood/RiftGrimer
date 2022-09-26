@@ -1,20 +1,25 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import { LOLapi } from "@libs/lolapi";
+import { useState } from "react";
+import { useEffect } from "react";
+import Layout from "@components/Layout";
 
 const Home: NextPage = () => {
-    console.log(process.env.NEXT_PUBLIC_RIOT_KEY);
-    const fetchPhotos = async () => {
-        const res = await fetch("/api/photos");
-        const { photos } = await res.json();
-        console.log(photos);
-    };
+    const [server, setServer] = useState("loading...");
+    const [rotation, setRotation] = useState([]);
+    // console.log(process.env.NEXT_PUBLIC_RIOT_KEY);
+    // const fetchPhotos = async () => {
+    //     const res = await fetch("/api/photos");
+    //     const { photos } = await res.json();
+    //     console.log(photos);
+    // };
 
-    const fetchPhotos2 = () => {
-        axios.get("/api/photos").then((res) => {
-            console.log(res.data.photos);
-        });
-    };
+    // const fetchPhotos2 = () => {
+    //     axios.get("/api/photos").then((res) => {
+    //         console.log(res.data.photos);
+    //     });
+    // };
 
     //이렇게 하면 cors가 안뜨는데... 일단 이런 식으로 따로 모듈화해두는게 좋을듯
     // axios
@@ -38,18 +43,35 @@ const Home: NextPage = () => {
     //     });
 
     //모듈화 해야됨 - api 설계 자체는 성공
-    LOLapi.rotation().then((res) => {
-        console.log(res.data);
-    });
+    // LOLapi.rotation().then((res) => {
+    //     console.log(res.data);
+    // });
 
-    LOLapi.searchByName().then((res) => {
-        console.log(res.data);
-    });
+    // LOLapi.searchByName("버튼을눌러지금딱").then((res) => {
+    //     console.log(res.data);
+    // });
 
-    fetchPhotos();
-    fetchPhotos2();
+    useEffect(() => {
+        LOLapi.serverStatus().then((res) => {
+            setServer(res.data.incidents[0].incident_severity);
+        });
 
-    return <></>;
+        LOLapi.rotation().then((res) => {
+            setRotation(res.data.freeChampionIds);
+        });
+    }, []);
+
+    return (
+        <Layout>
+            <div>한섭 서버 상태 : {server}</div>
+            <div>
+                금주의 로테이션 챔피언 :
+                {rotation.map((champ) => (
+                    <span key={champ}>{champ} </span>
+                ))}
+            </div>
+        </Layout>
+    );
 };
 
 export default Home;
