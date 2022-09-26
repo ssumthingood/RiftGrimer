@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import Layout from "@components/Layout";
 
 const Home: NextPage = () => {
-    const [server, setServer] = useState("loading...");
+    const [server, setServer] = useState([]);
     const [rotation, setRotation] = useState([]);
     // console.log(process.env.NEXT_PUBLIC_RIOT_KEY);
     // const fetchPhotos = async () => {
@@ -53,7 +53,7 @@ const Home: NextPage = () => {
 
     useEffect(() => {
         LOLapi.serverStatus().then((res) => {
-            setServer(res.data.incidents[0].incident_severity);
+            setServer(res.data.incidents);
         });
 
         LOLapi.rotation().then((res) => {
@@ -63,11 +63,11 @@ const Home: NextPage = () => {
 
     return (
         <Layout>
-            <div>한섭 서버 상태 : {server}</div>
+            <div>한섭 서버 상태 : {server.length > 0 ? server : "fine"}</div>
             <div>
                 금주의 로테이션 챔피언 :
                 {rotation.map((champ) => (
-                    <span key={champ}>{champ} </span>
+                    <span key={champ}> {champ}</span>
                 ))}
             </div>
         </Layout>
