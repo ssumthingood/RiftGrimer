@@ -1,4 +1,6 @@
+import { data } from "autoprefixer";
 import axios from "axios";
+import { useState } from "react";
 
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_RIOT_API,
@@ -15,23 +17,23 @@ export const LOLapi = {
     getRecentMatches: (puuid: string) => api.get(`match/v5/matches/by-puuid/${puuid}/ids`), //user puuid로 최근 경기의 경기코드 찾기
 };
 
-// export const championSquareImg = (championID: number) => {
-//     axios.get(`http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/${championID}.png`)
-//     .then(res=>{
-//         console.log(res);
-//     })
-//     .catch(err=>{
-//         console.log(err);
-//     })
-// };
-
-export const championSquareImg = () => {
+export const championNameById = (ID: string): string => {
+    var mydata: string = "undef";
     axios
-        .get(`http://ddragon.leagueoflegends.com/cdn/12.18.1/data/en_US/champion.json`)
+        .get("http://ddragon.leagueoflegends.com/cdn/12.18.1/data/en_US/champion.json")
         .then((res) => {
-            console.log(res);
+            const championList = res.data.data;
+            for (var i in championList) {
+                if (championList[i].key === ID) {
+                    // console.log(championList[i].id);
+                    console.log(championList[i].id);
+                    mydata = championList[i].id;
+                    break;
+                }
+            }
         })
         .catch((err) => {
-            console.log(err);
+            return err;
         });
+    return mydata;
 };
