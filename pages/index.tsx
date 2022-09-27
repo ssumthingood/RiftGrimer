@@ -1,9 +1,10 @@
 import axios from "axios";
 import type { NextPage } from "next";
-import { LOLapi } from "@libs/lolapi";
+import { championSquareImg, LOLapi } from "@libs/lolapi";
 import { useState } from "react";
 import { useEffect } from "react";
 import Layout from "@components/Layout";
+import { getChampName } from "@libs/client/champNameByID";
 
 const Home: NextPage = () => {
     const [server, setServer] = useState([]);
@@ -63,13 +64,14 @@ const Home: NextPage = () => {
 
     return (
         <Layout>
-            <div>한섭 서버 상태 : {server.length > 0 ? server : "fine"}</div>
+            <div>한섭 서버 상태 : {server.length > 0 ? "NOT FINE" : "FINE"}</div>
             <div>
                 금주의 로테이션 챔피언 :
                 {rotation.map((champ) => (
                     <span key={champ}> {champ}</span>
                 ))}
             </div>
+            {/* {getChampName()} */}
         </Layout>
     );
 };

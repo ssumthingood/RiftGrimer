@@ -14,3 +14,24 @@ export const LOLapi = {
     serverStatus: () => api.get("status/v4/platform-data"),
     getRecentMatches: (puuid: string) => api.get(`match/v5/matches/by-puuid/${puuid}/ids`), //user puuid로 최근 경기의 경기코드 찾기
 };
+
+// export const championSquareImg = (championID: number) => {
+//     axios.get(`http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/${championID}.png`)
+//     .then(res=>{
+//         console.log(res);
+//     })
+//     .catch(err=>{
+//         console.log(err);
+//     })
+// };
+
+export const championSquareImg = () => {
+    axios
+        .get(`http://ddragon.leagueoflegends.com/cdn/12.18.1/data/en_US/champion.json`)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
