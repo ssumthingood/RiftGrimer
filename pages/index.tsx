@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { cls } from "@libs/client/utils";
 import Layout from "@components/Layout";
+import Link from "next/link";
 
 const Home: NextPage = () => {
     const [server, setServer] = useState([]);
@@ -45,7 +46,9 @@ const Home: NextPage = () => {
             <div className={cls("w-96")}>
                 <div className={cls("grid grid-cols-8 gap-2 w-300")}>
                     {rotation.map((id) => (
-                        <img key={searchChampById(id)} className={cls("")} src={`https://opgg-static.akamaized.net/images/lol/champion/${searchChampById(id)}.png?image=c_crop,h_100,w_100`} />
+                        <Link href={`/champion/${id}`}>
+                            <img key={searchChampById(id)} className={cls("")} src={`https://opgg-static.akamaized.net/images/lol/champion/${searchChampById(id)}.png?image=c_crop,h_100,w_100`} />
+                        </Link>
                         // op.gg 사진으로 가져올시 이런 방법으로 사진크기 조절가능
                         // <img className={cls("")} src={`https://opgg-static.akamaized.net/images/lol/champion/${searchChampById(id)}.png?image=c_crop,h_100,w_100`} />
                     ))}
