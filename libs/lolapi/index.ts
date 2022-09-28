@@ -1,6 +1,4 @@
-import { data } from "autoprefixer";
 import axios from "axios";
-import { useState } from "react";
 
 const RIOTapi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_RIOT_API,
@@ -23,5 +21,6 @@ export const LOLapi = {
 
 export const DDragonapi = {
     championName: () => Ddragon.get("champion.json"),
-    //championName 메소드에 id:String의 형태로 param을 넣어 해당하는 챔피언의 정보만 가져오려 했으나 axios 사용하는 함수에서 string값이 반환이 안되는 이유로(only Promise) 전체 챔피언 목록을 가져옴
+    //championName 메소드에 numberid:String의 형태로 param을 넣어 해당하는 챔피언의 정보만 가져오려 했으나 axios 사용하는 함수에서 string값이 반환이 안되는 이유로(only Promise) 전체 챔피언 목록을 가져옴
+    championStatusByName: (name: string) => Ddragon.get(`champion/${name}.json`),
 };

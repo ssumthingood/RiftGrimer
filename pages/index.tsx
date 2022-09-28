@@ -31,6 +31,11 @@ const Home: NextPage = () => {
         DDragonapi.championName().then((res) => {
             setChamps(res.data.data);
         });
+
+        DDragonapi.championStatusByName("Aatrox").then((res) => {
+            const { Aatrox } = res.data.data;
+            console.log(Aatrox.id);
+        });
     }, []);
 
     return (
@@ -40,7 +45,7 @@ const Home: NextPage = () => {
             <div className={cls("w-96")}>
                 <div className={cls("grid grid-cols-8 gap-2 w-300")}>
                     {rotation.map((id) => (
-                        <img key={id} className={cls("")} src={`https://opgg-static.akamaized.net/images/lol/champion/${searchChampById(id)}.png?image=c_crop,h_100,w_100`} />
+                        <img key={searchChampById(id)} className={cls("")} src={`https://opgg-static.akamaized.net/images/lol/champion/${searchChampById(id)}.png?image=c_crop,h_100,w_100`} />
                         // op.gg 사진으로 가져올시 이런 방법으로 사진크기 조절가능
                         // <img className={cls("")} src={`https://opgg-static.akamaized.net/images/lol/champion/${searchChampById(id)}.png?image=c_crop,h_100,w_100`} />
                     ))}
