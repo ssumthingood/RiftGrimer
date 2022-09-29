@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 const ChampionDetail: NextPage = () => {
     const router = useRouter();
     const [champ, setchamp] = useState([]);
-    console.log(router.query.id);
+    console.log(router);
     useEffect(() => {
-        const champname = router.query.id!.toString();
-        DDragonapi.championStatusByName(champname).then((res) => {
-            setchamp(getChampStatByName(champname, res.data.data));
+        //router.query.id가 undefined가 아니란 걸 확실히 할 방법이 없을까?
+        DDragonapi.championStatusByName(router.query.id).then((res) => {
+            setchamp(getChampStatByName(router.query.id, res.data.data));
             console.log(champ);
         });
     }, []);
