@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { LOLapi, DDragonapi } from "@libs/lolapi";
 import { useState } from "react";
 import { useEffect } from "react";
-import { cls, getChampStatByName } from "@libs/client/utils";
+import { cls } from "@libs/client/utils";
 import Layout from "@components/Layout";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
     };
 
     useEffect(() => {
-        const champname = "Aatrox";
+        // const champname = "Aatrox";
 
         LOLapi.serverStatus().then((res) => {
             setServer(res.data.incidents);
@@ -35,11 +35,11 @@ const Home: NextPage = () => {
             setChamps(res.data.data);
         });
 
-        DDragonapi.championStatusByName(champname).then((res) => {
-            // const { Aatrox } = res.data.data;
-            // console.log(Aatrox.name);
-            console.log(getChampStatByName(champname, res.data.data));
-        });
+        // DDragonapi.championStatusByName(champname).then((res) => {
+        //     // const { Aatrox } = res.data.data;
+        //     // console.log(Aatrox.name);
+        //     console.log(getChampStatByName(champname, res.data.data));
+        // });
     }, []);
 
     return (
